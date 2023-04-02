@@ -1,13 +1,13 @@
-version: '3'
 
 services:
   app:
-    build: .
+    build:
+      context: .
     container_name: my_little_dev_environment_app
     ports:
-      - 8080:8080
+      - "8080:8080"
     volumes:
-      - ./src:/go/src/
+      - "./src:/go/src/"
     networks:
       - my-little-dev-environment
     depends_on:
@@ -17,14 +17,14 @@ services:
     image: mongo:4.2.3-bionic
     container_name: my_little_dev_environment_mongo_4
     ports:
-      - 27017:27017
+      - "27017:27017"
     environment:
-      - MONGO_INITDB_DATABASE=mylittledevenvironment
-      - MONGO_INITDB_ROOT_USERNAME=admin
-      - MONGO_INITDB_ROOT_PASSWORD=admin
+      MONGO_INITDB_DATABASE: mylittledevenvironment
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
     volumes:
       # seeding scripts
-      - ./mongo-entrypoint:/docker-entrypoint-initdb.d
+      - "./mongo-entrypoint:/docker-entrypoint-initdb.d"
     networks:
       - my-little-dev-environment
 
